@@ -61,7 +61,7 @@ class Model(ShapeModel):
         # Lighting
         self._light = None # see the light property
         light_h = self.config.getint('DEFAULT', 'light_h')
-        self.light_res = (light_h, 2 * light_h)
+        self.light_res = (light_h, 2 * light_h)  # 16, 32
         lxyz, lareas = self._gen_lights()
         self.lxyz, self.lareas = lxyz, lareas
         # Novel lighting conditions for relighting at test time:
