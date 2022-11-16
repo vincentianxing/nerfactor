@@ -125,7 +125,7 @@ class Model(BaseModel):
             'xyz': embedder_xyz, 'ldir': embedder_ldir, 'vdir': embedder_vdir}
         return embedder
 
-    def _calc_ldir(self, pts):
+    def _calc_ldir(self, pts):  # light direction
         surf2l = tf.reshape(
             self.lxyz, (1, -1, 3)) - pts[:, None, :]
         surf2l = mathutil.safe_l2_normalize(surf2l, axis=2)
@@ -135,7 +135,7 @@ class Model(BaseModel):
         return surf2l # NxLx3
 
     @staticmethod
-    def _calc_vdir(cam_loc, pts):
+    def _calc_vdir(cam_loc, pts):  # view direction
         surf2c = cam_loc - pts
         surf2c = mathutil.safe_l2_normalize(surf2c, axis=1)
         tf.debugging.assert_greater(

@@ -97,6 +97,8 @@ def process_view(config, model, batch):
     id_ = id_[0].numpy().decode()
     hw = hw[0, :]
 
+    print("Process view", id_)
+
     rayd = tf.linalg.l2_normalize(rayd, axis=1)
 
     out_dir = join(FLAGS.out_root, id_)
@@ -110,25 +112,32 @@ def process_view(config, model, batch):
         join(out_dir, 'normal.npy'), join(out_dir, 'normal.png'),
         join(out_dir, 'xyz.npy'), join(out_dir, 'xyz.png')]
     all_exist = all(exists(x) for x in expected)
+    print([exists(x) for x in expected])
+    print(all_exist)
     if all_exist:
         logger.info(f"Skipping {id_} since it's done already")
         return
+
+    print("Checked job done")
 
     # ------ Tracing from Camera to Object
 
     occu, exp_depth, exp_normal = compute_depth_and_normal(
         model, rayo, rayd, config)
+    print("Traced from camera to object")
 
     # Clip smaller-than-threshold alpha to 0
     transp_ind = tf.where(occu < FLAGS.occu_thres)
     occu = tf.tensor_scatter_nd_update(
         occu, transp_ind, tf.zeros((tf.shape(transp_ind)[0],)))
+    print("Clipped alpha")
 
-    # Write alpha map
+    # Write alpha map, transparency
     alpha_map = tf.reshape(occu, hw * sps)
     alpha_map = average_supersamples(alpha_map, sps)
     alpha_map = tf.clip_by_value(alpha_map, 0., 1.)
     geomutil.write_alpha(alpha_map, out_dir)
+    print("Finish writing alpha map")
 
     # Write XYZ map, whose background filling value is (0, 0, 0)
     surf = rayo + rayd * exp_depth[:, None] # Surface XYZs
@@ -136,6 +145,7 @@ def process_view(config, model, batch):
     xyz_map = average_supersamples(xyz_map, sps)
     xyz_map = imgutil.alpha_blend(xyz_map, alpha_map)
     geomutil.write_xyz(xyz_map, out_dir)
+    print("Finish writing xyz map")
 
     # Write normal map, whose background filling value is (0, 1, 0),
     # since using (0, 0, 0) leads to (0, 0, 0) tangents
@@ -147,6 +157,7 @@ def process_view(config, model, batch):
     normal_map = tf.linalg.l2_normalize(normal_map, axis=2)
     normal_map = tf.clip_by_value(normal_map, -1., 1.)
     geomutil.write_normal(normal_map, out_dir)
+    print("Finish writing normal map")
 
     # ------ Tracing from Object to light
 
@@ -159,19 +170,23 @@ def process_view(config, model, batch):
         model, surf, normal, config) # (n_surf_pts, n_lights)
     lvis_hit = np.clip(lvis_hit, 0., 1.)
     n_lights = lvis_hit.shape[1]
+    print("Finish computing light vis")
 
     # Put the light visibility values into the full tensor
     hit_map = hit.numpy().reshape(tuple(hw) + (1,))
     lvis = np.zeros( # (imh, imw, n_lights)
         tuple(hw) + (n_lights,), dtype=np.float32)
     lvis[np.broadcast_to(hit_map, lvis.shape)] = lvis_hit.ravel()
+    print("Finish putting alpha map")
 
     # Mask visibility maps with alpha maps
     for i in range(lvis.shape[2]):
         lvis[:, :, i] = imgutil.alpha_blend(lvis[:, :, i], alpha_map)
+    print("Finish making light vis map")
 
     # Write light visibility map
     geomutil.write_lvis(lvis, FLAGS.fps, out_dir)
+    print("Finish writing light vis map")
 
 
 def compute_light_visibility(model, surf, normal, config, lvis_near=.1):
@@ -189,7 +204,9 @@ def compute_light_visibility(model, surf, normal, config, lvis_near=.1):
     n_lights = lxyz_flat.shape[1]
     lvis_hit = np.zeros(
         (surf.shape[0], n_lights), dtype=np.float32) # (n_surf_pts, n_lights)
+    print("n_lights: ", n_lights)
     for i in range(0, n_lights, FLAGS.lpix_chunk):
+        print("LightVis chunk ", i)
         end_i = min(n_lights, i + FLAGS.lpix_chunk)
         lxyz_chunk = lxyz_flat[:, i:end_i, :] # (1, lpix_chunk, 3)
 
@@ -283,6 +300,7 @@ def compute_depth_and_normal(model, rayo, rayd, config):
         'fine_a_out', model.net['fine_sigma_out'])
     sigma_chunks, normal_chunks = [], [] # chunk by chunk to avoid OOM
     for i in range(0, pts_flat.shape[0], FLAGS.mlp_chunk):
+        print("Depth&Normal chunk ", i)
         end_i = min(pts_flat.shape[0], i + FLAGS.mlp_chunk)
         pts_chunk = pts_flat[i:end_i, :]
         # Sigma
@@ -298,6 +316,7 @@ def compute_depth_and_normal(model, rayo, rayd, config):
         #
         sigma_chunks.append(sigma_chunk)
         normal_chunks.append(normal_chunk)
+
     assert sigma_chunks, "No sigma chunk to concat."
     sigma_flat = tf.concat(sigma_chunks, axis=0)
     # Override out-of-bounds sigma to 0
