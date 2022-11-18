@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="add .idea">
+    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="change resolution">
+      <change afterPath="$PROJECT_DIR$/runme.bash" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/util/geom.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/util/geom.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_geom_from_nerf.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_geom_from_nerf.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +71,7 @@
       <workItem from="1668632359135" duration="5361000" />
       <workItem from="1668637747030" duration="600000" />
       <workItem from="1668638938062" duration="1135000" />
-      <workItem from="1668798792523" duration="2261000" />
+      <workItem from="1668798792523" duration="7273000" />
     </task>
     <task id="LOCAL-00001" summary="update train_geom_from_nerf">
       <created>1668638038746</created>
@@ -89,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668639323980</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="change resolution">
+      <created>1668801313469</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1668801313469</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,7 +114,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update train_geom_from_nerf" />
     <MESSAGE value="add .idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="add .idea" />
+    <MESSAGE value="change resolution" />
+    <option name="LAST_COMMIT_MESSAGE" value="change resolution" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
