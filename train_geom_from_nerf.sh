@@ -8,7 +8,7 @@ if [[ "$scene" == scan* ]]; then
     # DTU scenes
     imh='256'
 else
-    imh='512'
+    imh='256'  # change to 256
 fi
 if [[ "$scene" == ficus* || "$scene" == hotdog_probe_16-00_latlongmap ]]; then
     lr='1e-4'

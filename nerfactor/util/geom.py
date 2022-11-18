@@ -35,13 +35,13 @@ def write_lvis(lvis, fps, out_dir):
     lvis_avg = np.mean(lvis, axis=2)
     xm.io.img.write_arr(lvis_avg, vis_out)
     # Visualize light visibility for each light pixel
-    vis_out = join(out_dir, 'lvis.mp4')
-    frames = []
-    for i in range(lvis.shape[2]): # for each light pixel
-        frame = xm.img.denormalize_float(lvis[:, :, i])
-        frame = np.dstack([frame] * 3)
-        frames.append(frame)
-    xm.vis.video.make_video(frames, outpath=vis_out, fps=fps)
+    # vis_out = join(out_dir, 'lvis.mp4')
+    # frames = []
+    # for i in range(lvis.shape[2]): # for each light pixel
+    #     frame = xm.img.denormalize_float(lvis[:, :, i])
+    #     frame = np.dstack([frame] * 3)
+    #     frames.append(frame)
+    # xm.vis.video.make_video(frames, outpath=vis_out, fps=fps)
 
 
 def write_xyz(xyz_arr, out_dir):

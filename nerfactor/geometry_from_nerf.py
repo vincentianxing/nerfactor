@@ -74,6 +74,7 @@ def main(_):
     config = ioutil.read_config(config_ini)
     if FLAGS.imh is not None: # if using a new image resolution
         config.set('DEFAULT', 'imh', str(FLAGS.imh))
+    print("Image resolution: ", str(FLAGS.imh))
 
     # Restore model
     model = restore_model(config, latest_ckpt)
