@@ -22,7 +22,7 @@ from data_gen.util import gen_data
 
 
 flags.DEFINE_string('scene_dir', '', "scene directory")
-flags.DEFINE_integer('h', 512, "output image height")
+flags.DEFINE_integer('h', 256, "output image height")
 flags.DEFINE_integer('n_vali', 2, "number of held-out validation views")
 flags.DEFINE_float('bound_factor', .75, "bound factor")
 flags.DEFINE_string('outroot', '', "output root")

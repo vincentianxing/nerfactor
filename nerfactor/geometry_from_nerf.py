@@ -79,12 +79,17 @@ def main(_):
     # Restore model
     model = restore_model(config, latest_ckpt)
 
-    for mode in ('train', 'vali', 'test'):
+    print("Restored model")
+
+    for mode in ('test', 'train',):
         # Make datapipe
         n_views, datapipe = make_datapipe(config, mode)
 
+        print("Made datapipe for", mode)
+
         # Process all views of this mode
         for batch in tqdm(datapipe, desc=f"Views ({mode})", total=n_views):
+            print("Starting to process a view")
             process_view(config, model, batch)
 
             if FLAGS.debug:
