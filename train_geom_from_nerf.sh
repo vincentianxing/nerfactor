@@ -4,6 +4,7 @@ proj_root='/home/tzhu38'
 repo_dir="$proj_root/nerfactor"
 viewer_prefix='http://vision38.csail.mit.edu' # or just use ''
 data_root="$proj_root/james/$scene"
+
 if [[ "$scene" == scan* ]]; then
     # DTU scenes
     imh='256'

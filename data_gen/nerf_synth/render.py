@@ -21,7 +21,7 @@ flags.DEFINE_string(
     'test_light_dir', '', "directory containing the test (novel) light probes")
 flags.DEFINE_integer('vali_first_n', 8, "")
 flags.DEFINE_float('light_inten', 3, "global scale for the light probe")
-flags.DEFINE_integer('res', 512, "resolution of the squre renders")
+flags.DEFINE_integer('res', 256, "resolution of the squre renders")
 flags.DEFINE_integer('spp', 128, "samples per pixel")
 flags.DEFINE_boolean(
     'add_glossy_albedo', False,

@@ -71,6 +71,7 @@ def compute_rgb_scales(alpha_thres=0.9):
     pred = xm.img.normalize_uint(pred)
     gt = xm.img.normalize_uint(gt)
     pred = pred ** 2.2 # undo gamma
+    print('test.py: Resizing image of shape ', gt.shape, ' to ', pred.shape)  # Zack 11/20 7pm
     gt = xm.img.resize(gt, new_h=pred.shape[0], method='tf')
     alpha = gt[:, :, 3]
     gt = gt[:, :, :3]

@@ -150,7 +150,7 @@ class Dataset(BaseDataset):
         normal = ioutil.load_np(paths['normal'])
         if self.debug:
             logger.warn("Faking light visibility for faster debugging")
-            lvis = 0.5 * np.ones(normal.shape[:2] + (512,), dtype=np.float32)
+            lvis = 0.5 * np.ones(normal.shape[:2] + (256,), dtype=np.float32)
         else:
             lvis = ioutil.load_np(paths['lvis'])
         # RGB and alpha, depending on the mode
@@ -172,7 +172,8 @@ class Dataset(BaseDataset):
             else:
                 alpha = rgba[:, :, 3] # ground-truth alpha
         # Resize
-        if imh != xyz.shape[0]:
+        if True: #imh != xyz.shape[0]:
+            print('datasets/nerf_shape.py: Resizing images of shape ', xyz.shape, ' to ', imh)  # Zack 11/20 7pm
             xyz = xm.img.resize(xyz, new_h=imh)
             normal = xm.img.resize(normal, new_h=imh)
             lvis = xm.img.resize(lvis, new_h=imh)

@@ -59,6 +59,7 @@ def main(_):
             else:
                 assert float(img.shape[0]) / FLAGS.h == factor, \
                     "Images are of varying sizes"
+            print('B: Resizing image of shape ', img.shape, ' to ', FLAGS.h)  # Zack 11/20 7pm
             img = xm.img.resize(img, new_h=FLAGS.h, method='tf')
             if img.shape[2] == 3:
                 # NOTE: add an all-one alpha

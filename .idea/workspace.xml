@@ -2,8 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="change resolution">
+      <change afterPath="$PROJECT_DIR$/train_nerfactor.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/train_nerfactor_1.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runme.bash" beforeDir="false" afterPath="$PROJECT_DIR$/runme.bash" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_gen/dtu_mvs/make_dataset_from_raw.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_gen/dtu_mvs/make_dataset_from_raw.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_gen/nerf_real/make_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_gen/nerf_real/make_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_gen/nerf_synth/render.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_gen/nerf_synth/render.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerf.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerf.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor_microfacet.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor_microfacet.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor_mvs.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor_mvs.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_geom_opt.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_geom_opt.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_geom_pretrain.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_geom_pretrain.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_smooth.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_smooth.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/config/shape.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/shape.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/config/shape_mvs.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/shape_mvs.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/datasets/mvs_shape.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/datasets/mvs_shape.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/datasets/nerf.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/datasets/nerf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/datasets/nerf_shape.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/datasets/nerf_shape.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_geom_from_nerf.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_geom_from_nerf.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_nerf.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_nerf.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +42,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false"
+  }
+}]]></component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="nerfactor" />
@@ -66,6 +88,7 @@
       <workItem from="1668638938062" duration="1135000" />
       <workItem from="1668798792523" duration="7273000" />
       <workItem from="1668806738715" duration="161000" />
+      <workItem from="1668981841122" duration="9806000" />
     </task>
     <task id="LOCAL-00001" summary="update train_geom_from_nerf">
       <created>1668638038746</created>
@@ -104,13 +127,13 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update train_geom_from_nerf" />
     <MESSAGE value="add .idea" />
     <MESSAGE value="change resolution" />
-    <option name="LAST_COMMIT_MESSAGE" value="change resolution" />
+    <MESSAGE value="runme" />
+    <option name="LAST_COMMIT_MESSAGE" value="runme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -167,37 +190,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>80</line>
+          <line>82</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>88</line>
+          <line>93</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>303</line>
+          <line>308</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>126</line>
+          <line>131</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>170</line>
+          <line>175</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>248</line>
+          <line>253</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>209</line>
+          <line>214</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -209,6 +232,41 @@
           <url>file://$PROJECT_DIR$/nerfactor/util/geom.py</url>
           <line>43</line>
           <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/trainvali.py</url>
+          <line>177</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/trainvali.py</url>
+          <line>83</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/trainvali.py</url>
+          <line>84</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/datasets/nerf.py</url>
+          <line>163</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/test.py</url>
+          <line>74</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/datasets/nerf_shape.py</url>
+          <line>174</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/datasets/nerf_shape.py</url>
+          <line>147</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

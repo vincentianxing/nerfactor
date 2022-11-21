@@ -160,6 +160,7 @@ class Dataset(BaseDataset):
         rgba = xm.img.normalize_uint(rgba)
         # Resize RGB
         if imh != rgba.shape[0]:
+            print('datasets/nerf.py: Resizing image of shape ', rgba.shape, ' to ', imh)  # Zack 11/20 7pm
             rgba = xm.img.resize(rgba, new_h=imh)
         rgb, alpha = rgba[:, :, :3], rgba[:, :, 3]
         # Composite RGBA image onto white or black background
