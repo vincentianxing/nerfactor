@@ -359,6 +359,7 @@ class Model(ShapeModel):
             for _, light in self.novel_probes.items():
                 rgb_relit = integrate(light)
                 rgb_probes.append(rgb_relit)
+            print([a.device for a in rgb_probes])
             rgb_probes = tf.concat([x[:, None, :] for x in rgb_probes], axis=1)
             rgb_probes = tf.debugging.check_numerics(
                 rgb_probes, "Light Probe Renders")

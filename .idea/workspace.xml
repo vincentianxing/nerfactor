@@ -1,29 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="change resolution">
-      <change afterPath="$PROJECT_DIR$/train_nerfactor.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/train_nerfactor_1.sh" afterDir="false" />
+    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="trash">
+      <change afterPath="$PROJECT_DIR$/train_nerfactor_pt3.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_gen/dtu_mvs/make_dataset_from_raw.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_gen/dtu_mvs/make_dataset_from_raw.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_gen/nerf_real/make_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_gen/nerf_real/make_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_gen/nerf_synth/render.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_gen/nerf_synth/render.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerf.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerf.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor_microfacet.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor_microfacet.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor_mvs.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor_mvs.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_geom_opt.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_geom_opt.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_geom_pretrain.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_geom_pretrain.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_smooth.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor_no_smooth.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/config/shape.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/shape.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/config/shape_mvs.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/shape_mvs.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/datasets/mvs_shape.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/datasets/mvs_shape.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/datasets/nerf.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/datasets/nerf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/datasets/nerf_shape.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/datasets/nerf_shape.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_geom_from_nerf.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_geom_from_nerf.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_nerf.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_nerf.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/xiuminglib/xiuminglib/vis/video.py" beforeDir="false" afterPath="$PROJECT_DIR$/third_party/xiuminglib/xiuminglib/vis/video.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,11 +24,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="nerfactor" />
@@ -88,7 +71,9 @@
       <workItem from="1668638938062" duration="1135000" />
       <workItem from="1668798792523" duration="7273000" />
       <workItem from="1668806738715" duration="161000" />
-      <workItem from="1668981841122" duration="9806000" />
+      <workItem from="1668981841122" duration="10127000" />
+      <workItem from="1669061694557" duration="88000" />
+      <workItem from="1669061796714" duration="7134000" />
     </task>
     <task id="LOCAL-00001" summary="update train_geom_from_nerf">
       <created>1668638038746</created>
@@ -111,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668801313469</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="trash">
+      <created>1668991970659</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668991970659</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,7 +125,8 @@
     <MESSAGE value="add .idea" />
     <MESSAGE value="change resolution" />
     <MESSAGE value="runme" />
-    <option name="LAST_COMMIT_MESSAGE" value="runme" />
+    <MESSAGE value="trash" />
+    <option name="LAST_COMMIT_MESSAGE" value="trash" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -267,6 +260,96 @@
           <url>file://$PROJECT_DIR$/nerfactor/datasets/nerf_shape.py</url>
           <line>147</line>
           <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data_gen/merl/make_dataset.py</url>
+          <line>72</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data_gen/merl/make_dataset.py</url>
+          <line>74</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/brdf/merl/merl.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/brdf/merl/merl.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>58</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/util/io.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/brdf.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/brdf.py</url>
+          <line>51</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/networks/layers.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>57</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/test.py</url>
+          <line>175</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/test.py</url>
+          <line>195</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/test.py</url>
+          <line>161</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>601</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/third_party/xiuminglib/xiuminglib/vis/video.py</url>
+          <line>80</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>362</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>91</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>89</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
