@@ -116,15 +116,16 @@ def main(_):
 def render_view(cam_transform_mat, cam_angle_x, outdir):
     xm.os.makedirs(outdir, rm_if_exists=FLAGS.overwrite)
 
-    light_transforms, light_positions, light_intensities = []
+    light_transforms, light_positions, light_intensities = [], [], []
     for o in bpy.data.objects:
         if o.type == 'LIGHT':
             trans_matrix = o.matrix_world
             light_transform_mat_str = ','.join(
             str(x) for x in listify_matrix(trans_matrix))
+            light_position_str = ','.join(str(trans_matrix.translation))
             light_transforms.append(light_transform_mat_str)
-            light_positions.append(trans_matrix.translation)
-            light_intensities.append(o.energy)
+            light_positions.append(light_position_str)
+            light_intensities.append(o.data.energy)
 
     # Dump metadata
     metadata_json = join(outdir, 'metadata.json')

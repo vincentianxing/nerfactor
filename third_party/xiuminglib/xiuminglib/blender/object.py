@@ -854,7 +854,7 @@ def add_sphere(
     sphere.modifiers['Subdivision'].levels = n_subdiv
     sphere.modifiers['Subdivision'].render_levels = n_subdiv
     bpy.context.view_layer.objects.active = sphere
-    bpy.ops.object.modifier_apply(modifier='Subdivision', apply_as='DATA')
+    bpy.ops.object.modifier_apply(modifier='Subdivision')
 
     # Fake smoothness
     if shade_smooth:

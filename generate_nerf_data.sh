@@ -1,7 +1,7 @@
-scene='hotdog'
-light='2188'
+scene='hotdog_new'
+light='black'
 proj_root='/home/dhu24/GitHub/nerfactor-project'
-blender_bin="$proj_root/software/blender-2.83.4-linux64/blender"
+blender_bin="$proj_root/software/blender-3.3.1-linux-x64/blender"
 repo_dir="$proj_root/nerfactor"
 scene_path="$proj_root/data/scenes/$scene.blend"
 light_path="$proj_root/data/envmaps/for-render_h16/train/$light.hdr"
@@ -29,7 +29,7 @@ PYTHONPATH="$REPO_DIR" \
     --light_inten="$light_inten" \
     --add_glossy_albedo="$add_glossy_albedo" \
     --outdir="$outdir" \
-    1> /dev/null
+#    1> /dev/null
 
 # "$repo_dir/data_gen/nerf_synth/render_run.sh" --scene_path="$scene_path" 
 #--light_path="$light_path" --cam_dir="$cam_dir" 
