@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-
+from os import environ
+# Dylan - 11/20
+# https://github.com/opencv/opencv/issues/21326
+environ["OPENCV_IO_ENABLE_OPENEXR"]="1"
 import sys
 from os.path import join, basename, exists
 import numpy as np
@@ -21,7 +24,7 @@ flags.DEFINE_string(
     'test_light_dir', '', "directory containing the test (novel) light probes")
 flags.DEFINE_integer('vali_first_n', 8, "")
 flags.DEFINE_float('light_inten', 3, "global scale for the light probe")
-flags.DEFINE_integer('res', 512, "resolution of the squre renders")
+flags.DEFINE_integer('res', 256, "resolution of the squre renders")
 flags.DEFINE_integer('spp', 128, "samples per pixel")
 flags.DEFINE_boolean(
     'add_glossy_albedo', False,
@@ -224,7 +227,7 @@ def render_view(cam_transform_mat, cam_angle_x, outdir):
                 glossy_color_exr, cam=cam_obj, select='glossy_color')
             glossy_color = xm.io.exr.read(glossy_color_exr)
         else:
-            glossy_color = np.zero_like(diffuse_color)
+            glossy_color = np.zeros_like(diffuse_color)
         albedo = diffuse_color + glossy_color
         albedo = np.dstack((albedo, alpha))
         xm.io.img.write_arr(albedo, albedo_png, clip=True)

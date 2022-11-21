@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 
 # Copyright 2021 Google LLC
 #
@@ -14,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
-
+echo "$repo_dir"
+echo "$BLENDER_BIN"
 PYTHONPATH="$REPO_DIR" \
     "$BLENDER_BIN" --background \
     --python "$REPO_DIR/data_gen/nerf_synth/render.py" \
