@@ -116,6 +116,16 @@ def main(_):
 def render_view(cam_transform_mat, cam_angle_x, outdir):
     xm.os.makedirs(outdir, rm_if_exists=FLAGS.overwrite)
 
+    light_transforms, light_positions, light_intensities = []
+    for o in bpy.data.objects:
+        if o.type == 'LIGHT':
+            trans_matrix = o.matrix_world
+            light_transform_mat_str = ','.join(
+            str(x) for x in listify_matrix(trans_matrix))
+            light_transforms.append(light_transform_mat_str)
+            light_positions.append(trans_matrix.translation)
+            light_intensities.append(o.energy)
+
     # Dump metadata
     metadata_json = join(outdir, 'metadata.json')
     if not exists(metadata_json):
@@ -126,7 +136,11 @@ def render_view(cam_transform_mat, cam_angle_x, outdir):
             'cam_transform_mat': cam_transform_mat_str,
             'cam_angle_x': cam_angle_x, 'envmap': basename(FLAGS.light_path),
             'envmap_inten': FLAGS.light_inten, 'imh': FLAGS.res,
-            'imw': FLAGS.res, 'spp': FLAGS.spp}
+            'imw': FLAGS.res, 'spp': FLAGS.spp,
+            'light_transform_mats': light_transforms,
+            'light_positions': light_positions,
+            'light_intensities': light_intensities
+            }
         xm.io.json.write(data, metadata_json)
 
     # Open scene
@@ -145,15 +159,15 @@ def render_view(cam_transform_mat, cam_angle_x, outdir):
     bpy.ops.object.delete({'selected_objects': objs})
 
     # Remove existing lights, if any
-    objs = []
-    for o in bpy.data.objects:
-        if o.type == 'LIGHT':
-            objs.append(o)
-        elif o.active_material is not None:
-            for node in o.active_material.node_tree.nodes:
-                if node.type == 'EMISSION':
-                    objs.append(o)
-    bpy.ops.object.delete({'selected_objects': objs})
+    # objs = []
+    # for o in bpy.data.objects:
+    #     if o.type == 'LIGHT':
+    #         objs.append(o)
+    #     elif o.active_material is not None:
+    #         for node in o.active_material.node_tree.nodes:
+    #             if node.type == 'EMISSION':
+    #                 objs.append(o)
+    # bpy.ops.object.delete({'selected_objects': objs})
 
     # Set camera
     cam_obj = bpy.data.objects['Camera']
