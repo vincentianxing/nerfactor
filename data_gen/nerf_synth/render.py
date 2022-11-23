@@ -122,7 +122,7 @@ def render_view(cam_transform_mat, cam_angle_x, outdir):
             trans_matrix = o.matrix_world
             light_transform_mat_str = ','.join(
             str(x) for x in listify_matrix(trans_matrix))
-            light_position_str = ','.join(str(trans_matrix.translation))
+            light_position_str = ','.join([str(trans_matrix.translation.x), str(trans_matrix.translation.y), str(trans_matrix.translation.z)])
             light_transforms.append(light_transform_mat_str)
             light_positions.append(light_position_str)
             light_intensities.append(o.data.energy)
