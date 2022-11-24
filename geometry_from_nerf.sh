@@ -1,11 +1,31 @@
-/home/dhu24/miniconda3/condabin/conda init
-/home/dhu24/miniconda3/condabin/conda activate nerfactor
-scene='lego_3072'
-gpus='0'
-proj_root='/home/dhu24/GitHub'
+# /home/dhu24/miniconda3/condabin/conda init
+# /home/dhu24/miniconda3/condabin/conda activate nerfactor
+# scene='lego_3072'
+# gpus='0'
+# proj_root='/home/dhu24/GitHub'
+# repo_dir="$proj_root/nerfactor"
+# viewer_prefix='http://vision38.csail.mit.edu' # or just use ''
+# data_root="$proj_root/james/data/$scene"
+
+## Mandy Script below ### --------------------
+#!/bin/bash                                                                     
+#? -cwd                                                                         
+
+# #scp -r /Users/mandyhe/Documents/Fall2022-2023/CSCI2951I\ /nerfactor/data/render_outdoor_inten3_gi/drums_new_black/ mhe26@ssh.cs.brown.edu:/home/mhe26/cs2951I/james/data/
+
+source /home/mhe26/miniconda3/etc/profile.d/conda.sh
+echo "$SHELL"    
+                                                                     
+conda activate nerfactor
+echo "Activated nerfactor environment"
+
+scene='hotdog_2163'
+gpus='0,1,2,3,4,5,6,7'
+proj_root='/home/mhe26/cs2951I'
 repo_dir="$proj_root/nerfactor"
-viewer_prefix='http://vision38.csail.mit.edu' # or just use ''
+viewer_prefix='http://vision38.csail.mit.edu' # or just use ''                  
 data_root="$proj_root/james/data/$scene"
+
 if [[ "$scene" == scan* ]]; then
     # DTU scenes
     imh='256'
