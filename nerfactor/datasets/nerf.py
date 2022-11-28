@@ -159,7 +159,7 @@ class Dataset(BaseDataset):
         assert rgba.ndim == 3 and rgba.shape[2] == 4, "Input image is not RGBA"
         rgba = xm.img.normalize_uint(rgba)
         # Resize RGB
-        if imh != rgba.shape[0]:
+        if True: # imh != rgba.shape[0]:
             print('datasets/nerf.py: Resizing image of shape ', rgba.shape, ' to ', imh)  # Zack 11/20 7pm
             rgba = xm.img.resize(rgba, new_h=imh)
         rgb, alpha = rgba[:, :, :3], rgba[:, :, 3]
