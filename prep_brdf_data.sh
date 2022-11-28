@@ -1,8 +1,7 @@
 #!/bin/bash
-
-echo "$SHELL"
 source /home/tzhu38/miniconda3/etc/profile.d/conda.sh
 conda activate nerfactor
+echo "================== Preparing BRDF data"
 
 proj_root='/home/tzhu38'
 repo_dir="$proj_root/nerfactor"
