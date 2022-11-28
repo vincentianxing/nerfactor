@@ -1,8 +1,8 @@
 #!/bin/bash
-
-echo "$SHELL"
 source /home/tzhu38/miniconda3/etc/profile.d/conda.sh
 conda activate nerfactor
+echo "================== Training nerfactor pt 2"
+echo "================== Joint optimization (training and validation)"
 
 scene='hotdog_2163'
 gpus='0, 1, 2, 3, 4, 5, 6, 7'
@@ -50,13 +50,3 @@ test_envmap_dir="$proj_root/data/envmaps/for-render_h16/test"
 shape_mode='finetune'
 outroot="$proj_root/output/train/${scene}_$model"
 REPO_DIR="$repo_dir" "$repo_dir/nerfactor/trainvali_run.sh" "$gpus" --config="$model.ini" --config_override="data_root=$data_root,imh=$imh,near=$near,far=$far,use_nerf_alpha=$use_nerf_alpha,data_nerf_root=$surf_root,shape_model_ckpt=$shape_ckpt,brdf_model_ckpt=$brdf_ckpt,xyz_jitter_std=$xyz_jitter_std,test_envmap_dir=$test_envmap_dir,shape_mode=$shape_mode,outroot=$outroot,viewer_prefix=$viewer_prefix,overwrite=$overwrite"
-
-# # III. Simultaneous Relighting and View Synthesis (testing)
-# ckpt="$outroot/lr5e-3/checkpoints/ckpt-10"
-# if [[ "$scene" == pinecone || "$scene" == vasedeck || "$scene" == scan* ]]; then
-#    # Real scenes: NeRF & DTU
-#    color_correct_albedo='false'
-# else
-#    color_correct_albedo='true'
-# fi
-# REPO_DIR="$repo_dir" "$repo_dir/nerfactor/test_run.sh" "$gpus" --ckpt="$ckpt" --color_correct_albedo="$color_correct_albedo"

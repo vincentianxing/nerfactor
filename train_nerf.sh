@@ -1,9 +1,7 @@
 #!/bin/bash
-
 source /home/tzhu38/miniconda3/etc/profile.d/conda.sh
-echo "$SHELL"
-
 conda activate nerfactor
+echo "================== Training nerf"
 
 scene='hotdog_2163'
 gpus='0,1,2,3,4,5,6,7'
@@ -11,6 +9,7 @@ proj_root='/home/tzhu38'
 repo_dir="$proj_root/nerfactor"
 viewer_prefix='http://vision38.csail.mit.edu' # or just use ''
 data_root="$proj_root/james/$scene"
+
 if [[ "$scene" == scan* ]]; then
     # DTU scenes
     imh='256'
