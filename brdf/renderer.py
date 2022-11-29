@@ -194,8 +194,6 @@ def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
         #     |            | /
         #     |            |/  
         #     +------------+
-        #                      lat = -pi/2
-        #                      lng = -pi
 
         # BEGIN:     THESE VALUES SHOULD BE IN SOME KIND OF CONFIG
         subdivisions = 8
@@ -212,7 +210,15 @@ def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
         ys = np.linspace(yMin + yStep / 2, yMax - yStep / 2, subdivisions)
         zs = np.linspace(zMin + zStep / 2, zMax - zStep / 2, subdivisions)
 
-        # ???
+        xx, yy, zz = np.meshgrid(xs, ys, zs, indexing='ij')
+
+        xyz = np.stack((xx, yy, zz), axis=3)
+        xyz.reshape(subdivisions, subdivisions, subdivisions, 3)
+
+        # We don't care about the areas
+        # (note: areas were just used to weight the lights to accurately represent a sphere, we are not using a sphere for
+        # representation anymore)
+        areas = np.ones((subdivisions, subdivisions, subdivisions, 3))
 
         return xyz, areas
     else:
