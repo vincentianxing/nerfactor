@@ -331,11 +331,8 @@ class Model(ShapeModel):
 
         def integrate(light):
             light_flat = tf.reshape(light, (-1, 3)) # Lx3
-            # print("light_flat.shape" , light_flat.shape)
             light = lvis[:, :, None] * light_flat[None, :, :] # NxLx3
-            # print("light.shape" , light.shape)
             light_pix_contrib = brdf * light * cos[:, :, None] * areas # NxLx3
-            # print("light_pix_contrib.shape" , light_pix_contrib.shape)
             rgb = tf.reduce_sum(light_pix_contrib, axis=1) # Nx3
             # Tonemapping
             rgb = tf.clip_by_value(rgb, 0., 1.) # NOTE
@@ -372,9 +369,11 @@ class Model(ShapeModel):
     def light(self):
         if self._light is None: # initialize just once
             maxv = self.config.getfloat('DEFAULT', 'light_init_max')
-            light = tf.random.uniform(
-                self.light_res + (3,), minval=0., maxval=maxv)
+            # light = tf.random.uniform(
+            #     self.light_res + (3,), minval=0., maxval=maxv)
+            light = np.zeros(self.light_res + (3,))
             self._light = tf.Variable(light, trainable=True)
+        print("Max light intensity: ", np.max(self._light))
         # No negative light
         return tf.clip_by_value(self._light, 0., np.inf) # 3D
 
@@ -528,19 +527,19 @@ class Model(ShapeModel):
             brdf_smooth_loss = smooth_loss(brdf_prop_pred, brdf_prop_jitter) # N
             loss += self.brdf_smooth_weight * brdf_smooth_loss
         # Light should be smooth
-        if mode == 'train':
-            light = self.light
+        # if mode == 'train':
+        #     light = self.light
             # Spatial TV penalty
-            if light_tv_weight > 0:
-                dx = light - tf.roll(light, 1, 1)
-                dy = light - tf.roll(light, 1, 0)
-                tv = tf.reduce_sum(dx ** 2 + dy ** 2)
-                loss += light_tv_weight * tv
+            # if light_tv_weight > 0:
+            #     dx = light - tf.roll(light, 1, 1)
+            #     dy = light - tf.roll(light, 1, 0)
+            #     tv = tf.reduce_sum(dx ** 2 + dy ** 2)
+            #     loss += light_tv_weight * tv
             # Cross-channel TV penalty
-            if light_achro_weight > 0:
-                dc = light - tf.roll(light, 1, 2)
-                tv = tf.reduce_sum(dc ** 2)
-                loss += light_achro_weight * tv
+            # if light_achro_weight > 0:
+            #     dc = light - tf.roll(light, 1, 2)
+            #     tv = tf.reduce_sum(dc ** 2)
+            #     loss += light_achro_weight * tv
         loss = tf.debugging.check_numerics(loss, "Loss")
         return loss
 
