@@ -184,39 +184,77 @@ class SphereRenderer:
 def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
     """Additionally returns the associated solid angles, for integration.
     """
-    # OpenEXR "latlong" format
-    # lat = pi/2
-    # lng = pi
-    #     +--------------------+
-    #     |                    |
-    #     |                    |
-    #     +--------------------+
-    #                      lat = -pi/2
-    #                      lng = -pi
-    lat_step_size = np.pi / (envmap_h + 2)
-    lng_step_size = 2 * np.pi / (envmap_w + 2)
-    # Try to exclude the problematic polar points
-    lats = np.linspace(
-        np.pi / 2 - lat_step_size, -np.pi / 2 + lat_step_size, envmap_h)
-    lngs = np.linspace(
-        np.pi - lng_step_size, -np.pi + lng_step_size, envmap_w)
-    lngs, lats = np.meshgrid(lngs, lats)
+    if (True):
+        # Our format
+        # 
+        #        +------------+
+        #       /            /|
+        #      /            / |
+        #     +------------+  +
+        #     |            | /
+        #     |            |/  
+        #     +------------+
 
-    # To Cartesian
-    rlatlngs = np.dstack((envmap_radius * np.ones_like(lats), lats, lngs))
-    rlatlngs = rlatlngs.reshape(-1, 3)
-    xyz = xm.geometry.sph.sph2cart(rlatlngs)
-    xyz = xyz.reshape(envmap_h, envmap_w, 3)
+        # BEGIN:     THESE VALUES SHOULD BE IN SOME KIND OF CONFIG
+        subdivisions = 8
+        xMin, xMax = -1.2, 1.2
+        yMin, yMax = -1.2, 1.2
+        zMin, zMax =  0.0, 0.6
+        # END:       THESE VALUES SHOULD BE IN SOME KIND OF CONFIG
+        
+        xStep = (xMax - xMin) / subdivisions
+        yStep = (yMax - yMin) / subdivisions
+        zStep = (zMax - zMin) / subdivisions
 
-    # Calculate the area of each pixel on the unit sphere (useful for
-    # integration over the sphere)
-    sin_colat = np.sin(np.pi / 2 - lats)
-    areas = 4 * np.pi * sin_colat / np.sum(sin_colat)
+        xs = np.linspace(xMin + xStep / 2, xMax - xStep / 2, subdivisions)
+        ys = np.linspace(yMin + yStep / 2, yMax - yStep / 2, subdivisions)
+        zs = np.linspace(zMin + zStep / 2, zMax - zStep / 2, subdivisions)
 
-    assert 0 not in areas, \
-        "There shouldn't be light pixel that doesn't contribute"
+        xx, yy, zz = np.meshgrid(xs, ys, zs, indexing='ij')
 
-    return xyz, areas
+        xyz = np.stack((xx, yy, zz), axis=3)
+        xyz.reshape(subdivisions, subdivisions, subdivisions, 3)
+
+        # We don't care about the areas
+        # (note: areas were just used to weight the lights to accurately represent a sphere, we are not using a sphere for
+        # representation anymore)
+        areas = np.ones((subdivisions, subdivisions, subdivisions, 1))
+
+        return xyz, areas
+    else:
+        # OpenEXR "latlong" format
+        # lat = pi/2
+        # lng = pi
+        #     +--------------------+
+        #     |                    |
+        #     |                    |
+        #     +--------------------+
+        #                      lat = -pi/2
+        #                      lng = -pi
+        lat_step_size = np.pi / (envmap_h + 2)
+        lng_step_size = 2 * np.pi / (envmap_w + 2)
+        # Try to exclude the problematic polar points
+        lats = np.linspace(
+            np.pi / 2 - lat_step_size, -np.pi / 2 + lat_step_size, envmap_h)
+        lngs = np.linspace(
+            np.pi - lng_step_size, -np.pi + lng_step_size, envmap_w)
+        lngs, lats = np.meshgrid(lngs, lats)
+
+        # To Cartesian
+        rlatlngs = np.dstack((envmap_radius * np.ones_like(lats), lats, lngs))
+        rlatlngs = rlatlngs.reshape(-1, 3)
+        xyz = xm.geometry.sph.sph2cart(rlatlngs)
+        xyz = xyz.reshape(envmap_h, envmap_w, 3)
+
+        # Calculate the area of each pixel on the unit sphere (useful for
+        # integration over the sphere)
+        sin_colat = np.sin(np.pi / 2 - lats)
+        areas = 4 * np.pi * sin_colat / np.sum(sin_colat)
+
+        assert 0 not in areas, \
+            "There shouldn't be light pixel that doesn't contribute"
+
+        return xyz, areas
 
 
 def load_light(envmap_path, envmap_inten=1., envmap_h=None, vis_path=None):

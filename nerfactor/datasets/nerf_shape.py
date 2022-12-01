@@ -150,7 +150,7 @@ class Dataset(BaseDataset):
         normal = ioutil.load_np(paths['normal'])
         if self.debug:
             logger.warn("Faking light visibility for faster debugging")
-            lvis = 0.5 * np.ones(normal.shape[:2] + (256,), dtype=np.float32)
+            lvis = 0.5 * np.ones(normal.shape[:2] + (512,), dtype=np.float32)
         else:
             lvis = ioutil.load_np(paths['lvis'])
         # RGB and alpha, depending on the mode

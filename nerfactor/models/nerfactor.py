@@ -331,8 +331,11 @@ class Model(ShapeModel):
 
         def integrate(light):
             light_flat = tf.reshape(light, (-1, 3)) # Lx3
+            # print("light_flat.shape" , light_flat.shape)
             light = lvis[:, :, None] * light_flat[None, :, :] # NxLx3
+            # print("light.shape" , light.shape)
             light_pix_contrib = brdf * light * cos[:, :, None] * areas # NxLx3
+            # print("light_pix_contrib.shape" , light_pix_contrib.shape)
             rgb = tf.reduce_sum(light_pix_contrib, axis=1) # Nx3
             # Tonemapping
             rgb = tf.clip_by_value(rgb, 0., 1.) # NOTE
@@ -359,6 +362,7 @@ class Model(ShapeModel):
             for _, light in self.novel_probes.items():
                 rgb_relit = integrate(light)
                 rgb_probes.append(rgb_relit)
+            print([a.device for a in rgb_probes])
             rgb_probes = tf.concat([x[:, None, :] for x in rgb_probes], axis=1)
             rgb_probes = tf.debugging.check_numerics(
                 rgb_probes, "Light Probe Renders")
