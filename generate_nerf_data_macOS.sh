@@ -1,4 +1,4 @@
-scene='drums_new'
+scene='hotdog_voxel_bright'
 light='black'
 proj_root='/Users/mandyhe/Documents/Fall2022-2023/CSCI2951I /nerfactor'
 blender_bin="/Applications/Blender.app/Contents/MacOS/Blender"
@@ -6,7 +6,7 @@ repo_dir="$proj_root"
 scene_path="$proj_root/data/scenes/$scene.blend"
 light_path="$proj_root/data/envmaps/for-render_h16/train/$light.hdr"
 cam_dir="$proj_root/data/cams/nerf"
-test_light_dir="$proj_root/data/envmaps/for-render_h16/test"
+#test_light_dir="$proj_root/data/envmaps/for-render_h16/test"
 light_inten='3'
 if [[ "$scene" == drums || "$scene" == lego ]]; then
     add_glossy_albedo='true'

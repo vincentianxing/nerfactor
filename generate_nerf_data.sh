@@ -1,4 +1,4 @@
-scene='hotdog_new'
+scene='hotdog_voxel'
 light='black'
 proj_root='/home/dhu24/GitHub/nerfactor-project'
 blender_bin="$proj_root/software/blender-3.3.1-linux-x64/blender"

@@ -228,41 +228,41 @@ def render_view(cam_transform_mat, cam_angle_x, outdir):
             xm.blender.render.render(outpath, cam=cam_obj)
             xm.blender.object.remove_objects(pt_light.name) # avoid light accu.
 
-    # Render albedo
-    # Let's assume white specularity, so the diffuse_color alone is albedo
-    albedo_png = join(outdir, 'albedo.png')
-    if not exists(albedo_png):
-        diffuse_color_exr = join(outdir, 'diffuse-color.exr')
-        xm.blender.render.render_lighting_passes(
-            diffuse_color_exr, cam=cam_obj, select='diffuse_color')
-        diffuse_color = xm.io.exr.read(diffuse_color_exr)
-        if FLAGS.add_glossy_albedo:
-            glossy_color_exr = join(outdir, 'glossy-color.exr')
-            xm.blender.render.render_lighting_passes(
-                glossy_color_exr, cam=cam_obj, select='glossy_color')
-            glossy_color = xm.io.exr.read(glossy_color_exr)
-        else:
-            glossy_color = np.zeros_like(diffuse_color)
-        albedo = diffuse_color + glossy_color
-        albedo = np.dstack((albedo, alpha))
-        xm.io.img.write_arr(albedo, albedo_png, clip=True)
+    # # Render albedo
+    # # Let's assume white specularity, so the diffuse_color alone is albedo
+    # albedo_png = join(outdir, 'albedo.png')
+    # if not exists(albedo_png):
+    #     diffuse_color_exr = join(outdir, 'diffuse-color.exr')
+    #     xm.blender.render.render_lighting_passes(
+    #         diffuse_color_exr, cam=cam_obj, select='diffuse_color')
+    #     diffuse_color = xm.io.exr.read(diffuse_color_exr)
+    #     if FLAGS.add_glossy_albedo:
+    #         glossy_color_exr = join(outdir, 'glossy-color.exr')
+    #         xm.blender.render.render_lighting_passes(
+    #             glossy_color_exr, cam=cam_obj, select='glossy_color')
+    #         glossy_color = xm.io.exr.read(glossy_color_exr)
+    #     else:
+    #         glossy_color = np.zeros_like(diffuse_color)
+    #     albedo = diffuse_color + glossy_color
+    #     albedo = np.dstack((albedo, alpha))
+    #     xm.io.img.write_arr(albedo, albedo_png, clip=True)
 
-    # Render normals ...
-    normal_png = join(outdir, 'normal.png')
-    if not exists(normal_png):
-        normal_exr = join(outdir, 'normal.exr')
-        normal_refball_exr = join(outdir, 'refball-normal.exr')
-        xm.blender.render.render_normal(
-            normal_exr, cam=cam_obj, world_coords=True,
-            outpath_refball=normal_refball_exr)
-        normals = xm.io.exr.read(normal_exr)
-        xm.vis.geometry.normal_as_image(
-            normals, alpha, outpath=normal_png, keep_alpha=True)
-        # and also normals of the reference ball
-        normals_refball = xm.io.exr.read(normal_refball_exr)
-        normal_refball_png = normal_refball_exr[:-len('.exr')] + '.png'
-        xm.vis.geometry.normal_as_image(
-            normals_refball, outpath=normal_refball_png, keep_alpha=True)
+    # # Render normals ...
+    # normal_png = join(outdir, 'normal.png')
+    # if not exists(normal_png):
+    #     normal_exr = join(outdir, 'normal.exr')
+    #     normal_refball_exr = join(outdir, 'refball-normal.exr')
+    #     xm.blender.render.render_normal(
+    #         normal_exr, cam=cam_obj, world_coords=True,
+    #         outpath_refball=normal_refball_exr)
+    #     normals = xm.io.exr.read(normal_exr)
+    #     xm.vis.geometry.normal_as_image(
+    #         normals, alpha, outpath=normal_png, keep_alpha=True)
+    #     # and also normals of the reference ball
+    #     normals_refball = xm.io.exr.read(normal_refball_exr)
+    #     normal_refball_png = normal_refball_exr[:-len('.exr')] + '.png'
+    #     xm.vis.geometry.normal_as_image(
+    #         normals_refball, outpath=normal_refball_png, keep_alpha=True)
 
 
 if __name__ == '__main__':
