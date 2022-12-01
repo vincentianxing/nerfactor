@@ -4,8 +4,8 @@ conda activate nerfactor
 echo "================== Training nerfactor pt 1"
 echo "================== Shape pre-training"
 
-scene='hotdog_2163'
-gpus='0, 1, 2, 3, 4, 5, 6, 7'
+scene='hotdog_voxel'
+gpus='0,1,2,3'
 model='nerfactor'
 overwrite='True'
 proj_root='/home/tzhu38'

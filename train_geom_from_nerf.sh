@@ -3,8 +3,8 @@ source /home/tzhu38/miniconda3/etc/profile.d/conda.sh
 conda activate nerfactor
 echo "================== Generating geometry buffers"
 
-scene='hotdog_2163'
-gpus='0,1,2,3'
+scene='hotdog_voxel'
+gpus='0,1'
 proj_root='/home/tzhu38'
 repo_dir="$proj_root/nerfactor"
 viewer_prefix='http://vision38.csail.mit.edu' # or just use ''

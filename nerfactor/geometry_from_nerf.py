@@ -81,15 +81,27 @@ def main(_):
 
     print("Restored model")
 
-    for mode in ('test', 'train',):
+    # Zack: manual parallelization
+    startCount = 185    
+
+    for mode in ['test']:
         # Make datapipe
         n_views, datapipe = make_datapipe(config, mode)
 
-        print("Made datapipe for", mode)
+        print("Made datapipe for", mode, ", but skipping first", startCount)
+
+        count = -1
 
         # Process all views of this mode
         for batch in tqdm(datapipe, desc=f"Views ({mode})", total=n_views):
-            print("Starting to process a view")
+            
+            count = count + 1
+
+            if count < startCount:
+                print("Skipping", mode, "view", count)
+                continue
+
+            print("Processing", mode, "view", count)
             process_view(config, model, batch)
 
             if FLAGS.debug:
@@ -215,6 +227,7 @@ def compute_light_visibility(model, surf, normal, config, lvis_near=.1):
         print("LightVis chunk ", i)
         end_i = min(n_lights, i + FLAGS.lpix_chunk)
         lxyz_chunk = lxyz_flat[:, i:end_i, :] # (1, lpix_chunk, 3)
+        print(lxyz_chunk)
 
         # From surface to lights
         surf2l = lxyz_chunk - surf[:, None, :] # (n_surf_pts, lpix_chunk, 3)

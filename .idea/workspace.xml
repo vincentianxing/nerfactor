@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="trash">
-      <change afterPath="$PROJECT_DIR$/train_nerf_minimal.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/datasets/nerf.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/datasets/nerf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/datasets/nerf_shape.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/datasets/nerf_shape.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brdf/renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/brdf/renderer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_geom_from_nerf.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_geom_from_nerf.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train_nerf.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_nerf.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_nerf_minimal.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_nerfactor_pt1.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_nerfactor_pt1.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_nerfactor_pt2.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_nerfactor_pt2.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +86,8 @@
       <workItem from="1669061694557" duration="88000" />
       <workItem from="1669061796714" duration="7134000" />
       <workItem from="1669675562182" duration="2011000" />
+      <workItem from="1669844590862" duration="303000" />
+      <workItem from="1669918570967" duration="1297000" />
     </task>
     <task id="LOCAL-00001" summary="update train_geom_from_nerf">
       <created>1668638038746</created>
@@ -196,32 +202,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>93</line>
+          <line>105</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>308</line>
+          <line>320</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>131</line>
+          <line>143</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>175</line>
+          <line>187</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>253</line>
+          <line>265</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
-          <line>214</line>
+          <line>226</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -233,11 +239,6 @@
           <url>file://$PROJECT_DIR$/nerfactor/util/geom.py</url>
           <line>43</line>
           <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/nerfactor/trainvali.py</url>
-          <line>177</line>
-          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/trainvali.py</url>
@@ -336,7 +337,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>601</line>
+          <line>604</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -346,7 +347,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>362</line>
+          <line>365</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -358,6 +359,11 @@
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
           <line>89</line>
           <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>263</line>
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

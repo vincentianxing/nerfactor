@@ -331,8 +331,11 @@ class Model(ShapeModel):
 
         def integrate(light):
             light_flat = tf.reshape(light, (-1, 3)) # Lx3
+            # print("light_flat.shape" , light_flat.shape)
             light = lvis[:, :, None] * light_flat[None, :, :] # NxLx3
+            # print("light.shape" , light.shape)
             light_pix_contrib = brdf * light * cos[:, :, None] * areas # NxLx3
+            # print("light_pix_contrib.shape" , light_pix_contrib.shape)
             rgb = tf.reduce_sum(light_pix_contrib, axis=1) # Nx3
             # Tonemapping
             rgb = tf.clip_by_value(rgb, 0., 1.) # NOTE

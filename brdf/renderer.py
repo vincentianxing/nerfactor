@@ -218,7 +218,7 @@ def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
         # We don't care about the areas
         # (note: areas were just used to weight the lights to accurately represent a sphere, we are not using a sphere for
         # representation anymore)
-        areas = np.ones((subdivisions, subdivisions, subdivisions, 3))
+        areas = np.ones((subdivisions, subdivisions, subdivisions, 1))
 
         return xyz, areas
     else:
