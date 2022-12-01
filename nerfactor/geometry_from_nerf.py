@@ -98,7 +98,7 @@ def main(_):
             
             count = count + 1
 
-            if count < startCount || doThisMany == 0:
+            if count < startCount or doThisMany == 0:
                 print("Skipping view", count, " (", mode, ")")
                 continue
 
