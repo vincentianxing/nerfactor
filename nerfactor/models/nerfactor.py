@@ -262,7 +262,7 @@ class Model(ShapeModel):
             surf2l, surf2c, normal_pred, albedo, brdf_prop) # NxLx3
         # ------ Rendering equation
         rgb_pred, rgb_olat, rgb_probes = self._render( # all Nx3
-            lvis_pred, brdf, surf2l, normal_pred, relight_olat=relight_olat,
+            lvis_pred, brdf, surf2l, normal_pred, xyz, relight_olat=relight_olat,
             relight_probes=relight_probes)
         # Put values back into the full shape
         ind = tf.where(mask)
@@ -313,7 +313,7 @@ class Model(ShapeModel):
         return pred, gt, loss_kwargs, to_vis
 
     def _render(
-            self, light_vis, brdf, l, n,
+            self, light_vis, brdf, l, n, xyz,
             relight_olat=False, relight_probes=False,
             white_light_override=False, white_lvis_override=False):
         linear2srgb = self.config.getboolean('DEFAULT', 'linear2srgb')
@@ -335,6 +335,8 @@ class Model(ShapeModel):
             light = lvis[:, :, None] * light_flat[None, :, :] # NxLx3
             # print("light.shape" , light.shape)
             light_pix_contrib = brdf * light * cos[:, :, None] * areas # NxLx3
+            attenuation = 1. / tf.math.pow(self.lxyz - xyz, 2)
+            light_pix_contrib *= attenuation
             # print("light_pix_contrib.shape" , light_pix_contrib.shape)
             rgb = tf.reduce_sum(light_pix_contrib, axis=1) # Nx3
             # Tonemapping
