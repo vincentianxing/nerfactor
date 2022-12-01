@@ -82,26 +82,28 @@ def main(_):
     print("Restored model")
 
     # Zack: manual parallelization
-    startCount = 185    
+    startCount =  0
+    doThisMany = 25
+    count = -1 
 
-    for mode in ['test']:
+    for mode in ['test', 'train', 'vali']: # 308
         # Make datapipe
         n_views, datapipe = make_datapipe(config, mode)
 
         print("Made datapipe for", mode, ", but skipping first", startCount)
 
-        count = -1
 
         # Process all views of this mode
         for batch in tqdm(datapipe, desc=f"Views ({mode})", total=n_views):
             
             count = count + 1
 
-            if count < startCount:
-                print("Skipping", mode, "view", count)
+            if count < startCount || doThisMany == 0:
+                print("Skipping view", count, " (", mode, ")")
                 continue
 
-            print("Processing", mode, "view", count)
+            print("Processing view", count, " (", mode, ")")
+            doThisMany = doThisMany - 1;
             process_view(config, model, batch)
 
             if FLAGS.debug:
