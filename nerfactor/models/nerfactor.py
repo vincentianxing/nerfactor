@@ -335,7 +335,8 @@ class Model(ShapeModel):
             light = lvis[:, :, None] * light_flat[None, :, :] # NxLx3
             # print("light.shape" , light.shape)
             light_pix_contrib = brdf * light * cos[:, :, None] * areas # NxLx3
-            attenuation = 1. / tf.math.pow(self.lxyz - xyz, 2)
+            surf2l = tf.reshape(self.lxyz, (1, -1, 3)) - xyz[:, None, :]
+            attenuation = 1. / tf.math.reduce_euclidean_norm(surf2l)
             light_pix_contrib *= attenuation
             # print("light_pix_contrib.shape" , light_pix_contrib.shape)
             rgb = tf.reduce_sum(light_pix_contrib, axis=1) # Nx3
