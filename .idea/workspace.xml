@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="update light initialization">
+    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="fix tf.zeros for light initialization">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brdf/renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/brdf/renderer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_geom_from_nerf.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_geom_from_nerf.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/trainvali.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/trainvali.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_nerfactor_pt2.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_nerfactor_pt2.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669939143412</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix tf.zeros for light initialization">
+      <created>1669939289866</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1669939289866</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,7 +164,8 @@
     <MESSAGE value="trash" />
     <MESSAGE value="fix or" />
     <MESSAGE value="update light initialization" />
-    <option name="LAST_COMMIT_MESSAGE" value="update light initialization" />
+    <MESSAGE value="fix tf.zeros for light initialization" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix tf.zeros for light initialization" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -282,17 +292,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>502</line>
+          <line>501</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/trainvali.py</url>
-          <line>280</line>
+          <line>290</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/trainvali.py</url>
-          <line>304</line>
+          <line>318</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -334,11 +344,6 @@
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
           <line>63</line>
           <option name="timeStamp" value="74" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>373</line>
-          <option name="timeStamp" value="76" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

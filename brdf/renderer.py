@@ -192,7 +192,7 @@ def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
         #      /            / |
         #     +------------+  +
         #     |            | /
-        #     |            |/  
+        #     |            |/
         #     +------------+
 
         # BEGIN:     THESE VALUES SHOULD BE IN SOME KIND OF CONFIG
@@ -201,7 +201,7 @@ def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
         yMin, yMax = -1.2, 1.2
         zMin, zMax =  0.0, 0.6
         # END:       THESE VALUES SHOULD BE IN SOME KIND OF CONFIG
-        
+
         xStep = (xMax - xMin) / subdivisions
         yStep = (yMax - yMin) / subdivisions
         zStep = (zMax - zMin) / subdivisions
@@ -213,12 +213,46 @@ def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
         xx, yy, zz = np.meshgrid(xs, ys, zs, indexing='ij')
 
         xyz = np.stack((xx, yy, zz), axis=3)
-        xyz.reshape(subdivisions, subdivisions, subdivisions, 3)
+        xyz = xyz.reshape((subdivisions, subdivisions, subdivisions, 3))
+        xyz += np.array([0,0,100])
 
         # We don't care about the areas
         # (note: areas were just used to weight the lights to accurately represent a sphere, we are not using a sphere for
         # representation anymore)
-        areas = np.ones((subdivisions, subdivisions, subdivisions, 1))
+        areas = np.ones((subdivisions, subdivisions, subdivisions))
+
+        print("xyz.shape",   xyz.shape)
+        print("areas.shape", areas.shape)
+
+        xyz = xyz.reshape((envmap_h, envmap_w, 3))
+        areas = areas.reshape((envmap_h, envmap_w))
+        print("modified xyz.shape",   xyz.shape)
+        print("modified areas.shape", areas.shape)
+
+        # Above this is my xyz code
+
+        # This is their xyz code
+        lat_step_size = np.pi / (envmap_h + 2)
+        lng_step_size = 2 * np.pi / (envmap_w + 2)
+        lats = np.linspace(
+            np.pi / 2 - lat_step_size, -np.pi / 2 + lat_step_size, envmap_h)
+        lngs = np.linspace(
+            np.pi - lng_step_size, -np.pi + lng_step_size, envmap_w)
+        lngs, lats = np.meshgrid(lngs, lats)
+        rlatlngs = np.dstack((envmap_radius * np.ones_like(lats), lats, lngs))
+        rlatlngs = rlatlngs.reshape(-1, 3)
+        xyz2 = xm.geometry.sph.sph2cart(rlatlngs)
+        xyz2 = xyz2.reshape(envmap_h, envmap_w, 3)
+
+        # xyz[:, 1:, :] = xyz2[:, 1:, :] # works
+        # xyz[:, 4:, :] = xyz2[:, 4:, :] # works
+        # xyz[:, 8:, :] = xyz2[:, 8:, :] # works
+        # xyz[:, 9:, :] = xyz2[:, 9:, :] # works
+        # xyz[:,10:, :] = xyz2[:,10:, :] # does not work
+        # xyz[:,11:, :] = xyz2[:,11:, :] # does not work
+        # xyz[:,12:, :] = xyz2[:,12:, :] # does not work
+        # xyz[:,16:, :] = xyz2[:,16:, :] # does not work
+        # xyz[:, 9 , :] = xyz2[:, 9 , :] # ??? maybe ???
 
         return xyz, areas
     else:
@@ -253,6 +287,9 @@ def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
 
         assert 0 not in areas, \
             "There shouldn't be light pixel that doesn't contribute"
+
+        print("xyz.shape",   xyz.shape)
+        print("areas.shape", areas.shape)
 
         return xyz, areas
 

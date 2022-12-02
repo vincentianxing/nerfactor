@@ -61,7 +61,7 @@ class Model(ShapeModel):
         # Lighting
         self._light = None # see the light property
         light_h = self.config.getint('DEFAULT', 'light_h')
-        self.light_res = (light_h, 2 * light_h)  # 16, 32
+        self.light_res = (light_h, 2 * light_h) # 16, 32
         lxyz, lareas = self._gen_lights()
         self.lxyz, self.lareas = lxyz, lareas
         # Novel lighting conditions for relighting at test time:
@@ -369,11 +369,10 @@ class Model(ShapeModel):
     def light(self):
         if self._light is None: # initialize just once
             maxv = self.config.getfloat('DEFAULT', 'light_init_max')
-            # light = tf.random.uniform(
-            #     self.light_res + (3,), minval=0., maxval=maxv)
-            light = tf.zeros(self.light_res + (3,))
+            light = tf.random.uniform(
+                self.light_res + (3,), minval=0., maxval=maxv)
             self._light = tf.Variable(light, trainable=True)
-        print("Max light intensity: ", np.max(self._light))
+        # print("Max light intensity: ", np.max(self._light))
         # No negative light
         return tf.clip_by_value(self._light, 0., np.inf) # 3D
 
@@ -627,7 +626,7 @@ class Model(ShapeModel):
                 if v is None:
                     continue
                 olat_names = list(self.novel_olat.keys())
-                olat_first_n = np.prod(self.light_res) // 2 # top half only
+                olat_first_n = np.prod(self.light_res) # NOPE, Zack # // 2 # top half only
                 olat_n = 0
                 for i, lname in enumerate(
                         tqdm(olat_names, desc="Writing OLAT-Relit Results")):
