@@ -371,7 +371,7 @@ class Model(ShapeModel):
             maxv = self.config.getfloat('DEFAULT', 'light_init_max')
             # light = tf.random.uniform(
             #     self.light_res + (3,), minval=0., maxval=maxv)
-            light = np.zeros(self.light_res + (3,))
+            light = tf.zeros(self.light_res + (3,))
             self._light = tf.Variable(light, trainable=True)
         print("Max light intensity: ", np.max(self._light))
         # No negative light
