@@ -129,11 +129,10 @@ class Model(BaseModel):
 
         surf2l = tf.reshape(self.lxyz, (1, -1, 3)) - pts[:, None, :]
 
-        tf.print("Max surface:")
-        tf.print(tf.reduce_max(pts, axis=0))
-        tf.print("Min surface:")
-        tf.print(tf.reduce_min(pts, axis=0))
-
+        # tf.print("Max surface:")
+        # tf.print(tf.reduce_max(pts, axis=0))
+        # tf.print("Min surface:")
+        # tf.print(tf.reduce_min(pts, axis=0))
 
         surf2l = mathutil.safe_l2_normalize(surf2l, axis=2)
 
@@ -146,7 +145,14 @@ class Model(BaseModel):
         tf.debugging.assert_less(
             tf.linalg.norm(surf2l, axis=2), 1.01,
             message="Found more than one -norm light directions")
+
         return surf2l # NxLx3
+
+    def _calc_unnormalized_ldir(self, pts):  # light direction
+
+        surf2l = tf.reshape(self.lxyz, (1, -1, 3)) - pts[:, None, :]
+
+        return surf2l  # NxLx3 UN NORMALIZED
 
     @staticmethod
     def _calc_vdir(cam_loc, pts):  # view direction

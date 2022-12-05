@@ -4,7 +4,7 @@ conda activate nerfactor
 echo "================== Training nerfactor pt 3"
 echo "================== Simultaneous relighting and view synthesis (testing)"
 
-scene='hotdog_2163'
+scene='hotdog_voxel'
 gpus='0' # for part3 only
 model='nerfactor'
 overwrite='True'
@@ -57,6 +57,7 @@ if [[ "$scene" == pinecone || "$scene" == vasedeck || "$scene" == scan* ]]; then
   # Real scenes: NeRF & DTU
   color_correct_albedo='false'
 else
-  color_correct_albedo='true'
+  # NOT color correcting albedo
+  color_correct_albedo='false'
 fi
 REPO_DIR="$repo_dir" "$repo_dir/nerfactor/test_run.sh" "$gpus" --ckpt="$ckpt" --color_correct_albedo="$color_correct_albedo"

@@ -191,7 +191,8 @@ class Model(ShapeModel):
         xyz = tf.boolean_mask(xyz, mask)
         normal = tf.boolean_mask(normal, mask)
         lvis = tf.boolean_mask(lvis, mask)
-        # Directions
+        # Directions (modified)
+        surf2lunnormalized = self._calc_unnormalized_ldir(xyz)
         surf2l = self._calc_ldir(xyz)
         surf2c = self._calc_vdir(rayo, xyz)
         # Jitter XYZs
@@ -262,7 +263,7 @@ class Model(ShapeModel):
             surf2l, surf2c, normal_pred, albedo, brdf_prop) # NxLx3
         # ------ Rendering equation
         rgb_pred, rgb_olat, rgb_probes = self._render( # all Nx3
-            lvis_pred, brdf, surf2l, normal_pred, relight_olat=relight_olat,
+            lvis_pred, brdf, surf2lunnormalized, normal_pred, relight_olat=relight_olat,
             relight_probes=relight_probes)
         # Put values back into the full shape
         ind = tf.where(mask)
@@ -313,7 +314,7 @@ class Model(ShapeModel):
         return pred, gt, loss_kwargs, to_vis
 
     def _render(
-            self, light_vis, brdf, l, n,
+            self, light_vis, brdf, lightDispl, n,
             relight_olat=False, relight_probes=False,
             white_light_override=False, white_lvis_override=False):
         linear2srgb = self.config.getboolean('DEFAULT', 'linear2srgb')
@@ -322,7 +323,8 @@ class Model(ShapeModel):
             light = np.ones_like(self.light)
         if white_lvis_override:
             light_vis = np.ones_like(light_vis)
-        cos = tf.einsum('ijk,ik->ij', l, n) # NxL
+        lightDir = mathutil.safe_l2_normalize(lightDispl, axis=2)
+        cos = tf.einsum('ijk,ik->ij', lightDir, n) # NxL
         # Areas for intergration
         areas = tf.reshape(self.lareas, (1, -1, 1)) # 1xLx1
         # NOTE: unnecessary if light_vis already encodes it, but won't hurt
@@ -335,7 +337,9 @@ class Model(ShapeModel):
         def integrate(light):
             light_flat = tf.reshape(light, (-1, 3)) # Lx3
             light = lvis[:, :, None] * light_flat[None, :, :] # NxLx3
-            light_pix_contrib = brdf * light * cos[:, :, None] # NxLx3
+
+            attenuation = tf.maximum(1., 1. / tf.pow(tf.norm(lightDispl), 2))
+            light_pix_contrib = brdf * light * cos[:, :, None] * attenuation # NxLx3
             rgb = tf.reduce_sum(light_pix_contrib, axis=1) # Nx3
             # Tonemapping
             rgb = tf.clip_by_value(rgb, 0., 1.) # NOTE
@@ -528,7 +532,7 @@ class Model(ShapeModel):
         if brdf_prop_jitter is not None:
             brdf_smooth_loss = smooth_loss(brdf_prop_pred, brdf_prop_jitter) # N
             loss += self.brdf_smooth_weight * brdf_smooth_loss
-        # Light should NOT be smooth, because we are using point light
+        # Light should NOT be smooth, because we are using point light !!!
         # if mode == 'train':
         #     light = self.light
             # Spatial TV penalty
