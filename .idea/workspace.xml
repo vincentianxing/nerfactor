@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="zack commits">
+    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="cleanup code, fix problematic gradient">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brdf/renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/brdf/renderer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_gen/merl/make_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_gen/merl/make_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nerfactor/datasets/nerf.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/datasets/nerf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/datasets/nerf_shape.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/datasets/nerf_shape.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/models/nerfactor_microfacet.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/models/nerfactor_microfacet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nerfactor/models/shape.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/models/shape.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/trainvali.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/trainvali.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/third_party/nielsen2015on/exampleTraining.py" beforeDir="false" afterPath="$PROJECT_DIR$/third_party/nielsen2015on/exampleTraining.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_nerfactor_pt2.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_nerfactor_pt2.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +89,7 @@
       <workItem from="1669918570967" duration="1297000" />
       <workItem from="1670011409651" duration="16146000" />
       <workItem from="1670267619202" duration="72000" />
-      <workItem from="1670272148759" duration="762000" />
+      <workItem from="1670272148759" duration="1943000" />
     </task>
     <task id="LOCAL-00001" summary="update train_geom_from_nerf">
       <created>1668638038746</created>
@@ -157,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670011489106</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="cleanup code, fix problematic gradient">
+      <created>1670272952227</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1670272952227</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,7 +181,8 @@
     <MESSAGE value="update light initialization" />
     <MESSAGE value="fix tf.zeros for light initialization" />
     <MESSAGE value="zack commits" />
-    <option name="LAST_COMMIT_MESSAGE" value="zack commits" />
+    <MESSAGE value="cleanup code, fix problematic gradient" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleanup code, fix problematic gradient" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -206,17 +204,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/shape.py</url>
-          <line>147</line>
+          <line>151</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/shape.py</url>
-          <line>159</line>
+          <line>163</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/shape.py</url>
-          <line>175</line>
+          <line>179</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

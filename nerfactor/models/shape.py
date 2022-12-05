@@ -129,12 +129,16 @@ class Model(BaseModel):
 
         surf2l = tf.reshape(self.lxyz, (1, -1, 3)) - pts[:, None, :]
 
-        tf.print("Max:")
+        tf.print("Max surface:")
         tf.print(tf.reduce_max(pts, axis=0))
-        tf.print("Min:")
+        tf.print("Min surface:")
         tf.print(tf.reduce_min(pts, axis=0))
 
+
         surf2l = mathutil.safe_l2_normalize(surf2l, axis=2)
+
+        tf.print("Max surf2l norm:")
+        tf.print(tf.reduce_max(tf.linalg.norm(surf2l, axis=2)))
 
         tf.debugging.assert_greater(
             tf.linalg.norm(surf2l, axis=2), 0.,
