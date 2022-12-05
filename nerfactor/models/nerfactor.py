@@ -326,22 +326,22 @@ class Model(ShapeModel):
             light = np.ones_like(self.light)
         if white_lvis_override:
             light_vis = np.ones_like(light_vis)
-        cos = tf.einsum('ijk,ik->ij', l, n) # NxL
+        # cos = tf.einsum('ijk,ik->ij', l, n) # NxL
         # Areas for intergration
         areas = tf.reshape(self.lareas, (1, -1, 1)) # 1xLx1
         # NOTE: unnecessary if light_vis already encodes it, but won't hurt
-        front_lit = tf.cast(cos > 0, tf.float32)
-        lvis = front_lit * light_vis # NxL
+        # front_lit = tf.cast(cos > 0, tf.float32)
+        lvis = light_vis # NxL
 
-        tf.print("front_lit")
-        tf.print(front_lit)
+        # tf.print("front_lit")
+        # tf.print(front_lit)
         tf.print("lvis in render()")
         tf.print(lvis)
 
         def integrate(light):
             light_flat = tf.reshape(light, (-1, 3)) # Lx3
             light = lvis[:, :, None] * light_flat[None, :, :] # NxLx3
-            light_pix_contrib = brdf * light * cos[:, :, None] * areas # NxLx3
+            light_pix_contrib = brdf * light # NxLx3
             rgb = tf.reduce_sum(light_pix_contrib, axis=1) # Nx3
             # Tonemapping
             rgb = tf.clip_by_value(rgb, 0., 1.) # NOTE
