@@ -5,7 +5,7 @@ echo "================== Training nerfactor pt 2"
 echo "================== Joint optimization (training and validation)"
 
 scene='hotdog_voxel'
-gpus='0, 1, 2, 3'
+gpus='0'
 model='nerfactor'
 overwrite='True'
 proj_root='/home/tzhu38'
@@ -48,5 +48,5 @@ else
 fi
 test_envmap_dir="$proj_root/data/envmaps/for-render_h16/test"
 shape_mode='finetune'
-outroot="$proj_root/output/train/${scene}_$model-shit3"
+outroot="$proj_root/output/train/${scene}_$model-shit1"
 REPO_DIR="$repo_dir" "$repo_dir/nerfactor/trainvali_run.sh" "$gpus" --config="$model.ini" --config_override="data_root=$data_root,imh=$imh,near=$near,far=$far,use_nerf_alpha=$use_nerf_alpha,data_nerf_root=$surf_root,shape_model_ckpt=$shape_ckpt,brdf_model_ckpt=$brdf_ckpt,xyz_jitter_std=$xyz_jitter_std,test_envmap_dir=$test_envmap_dir,shape_mode=$shape_mode,outroot=$outroot,viewer_prefix=$viewer_prefix,overwrite=$overwrite"

@@ -197,9 +197,9 @@ def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
 
         # BEGIN:     THESE VALUES SHOULD BE IN SOME KIND OF CONFIG
         subdivisions = 8
-        xMin, xMax = -1.2, 1.2
-        yMin, yMax = -1.2, 1.2
-        zMin, zMax =  0.0, 0.6
+        xMin, xMax = -1, 1
+        yMin, yMax = -1, 1
+        zMin, zMax = -1, 1
         # END:       THESE VALUES SHOULD BE IN SOME KIND OF CONFIG
 
         xStep = (xMax - xMin) / subdivisions
@@ -214,7 +214,6 @@ def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
 
         xyz = np.stack((xx, yy, zz), axis=3)
         xyz = xyz.reshape((subdivisions, subdivisions, subdivisions, 3))
-        xyz += np.array([0,0,100])
 
         # We don't care about the areas
         # (note: areas were just used to weight the lights to accurately represent a sphere, we are not using a sphere for
@@ -244,15 +243,27 @@ def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
         xyz2 = xm.geometry.sph.sph2cart(rlatlngs)
         xyz2 = xyz2.reshape(envmap_h, envmap_w, 3)
 
-        # xyz[:, 1:, :] = xyz2[:, 1:, :] # works
-        # xyz[:, 4:, :] = xyz2[:, 4:, :] # works
-        # xyz[:, 8:, :] = xyz2[:, 8:, :] # works
+        # xyz[:, 1:, :] = xyz2[:, 1:, :] # ???
+        # xyz[:, 4:, :] = xyz2[:, 4:, :] # ???
+        # xyz[:, 8:, :] = xyz2[:, 8:, :] # ???
         # xyz[:, 9:, :] = xyz2[:, 9:, :] # works
-        # xyz[:,10:, :] = xyz2[:,10:, :] # does not work
-        # xyz[:,11:, :] = xyz2[:,11:, :] # does not work
-        # xyz[:,12:, :] = xyz2[:,12:, :] # does not work
+        # xyz[:,10:, :] = xyz2[:,10:, :] # works
+        # xyz[:,11:, :] = xyz2[:,11:, :] # ???
+        # xyz[:,12:, :] = xyz2[:,12:, :] # ???
         # xyz[:,16:, :] = xyz2[:,16:, :] # does not work
-        # xyz[:, 9 , :] = xyz2[:, 9 , :] # ??? maybe ???
+        # xyz[:, 9 , :] = xyz2[:, 9 , :] # ???
+        # xyz[:,24:, :] = xyz2[:,24:, :] # does not work
+
+        # print("shifting xyz up by 100 units in z direction")
+        # xyz = xyz + np.array([0,0,100])[None, None, :]
+
+        print("Scaling voxels up by 1")
+        xyz = xyz * 1
+        print("Minimum norm =")
+        print(np.min( np.linalg.norm(xyz, axis=2) ))
+       
+        print("Final light xyz's used:")
+        print(xyz)
 
         return xyz, areas
     else:

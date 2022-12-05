@@ -59,19 +59,19 @@ class Model(BaseModel):
     def _gen_lights(self):
         # MVS shape initialization may have different light locations
         # because the scales and scene centers there are different
-        mvs_root = self.config.get('DEFAULT', 'mvs_root', fallback=None)
-        if mvs_root is None:
-            # Not an MVS initialization
-            light_h = self.config.getint('DEFAULT', 'light_h')
-            light_w = int(2 * light_h)
-            lxyz, lareas = gen_light_xyz(light_h, light_w)
-        else:
-            # MVS initialization needs a file of light locations
-            lxyz_path = join(mvs_root, 'lights.npz')
-            with open(lxyz_path, 'rb') as h:
-                data = np.load(h)
-                data = dict(data)
-            lxyz, lareas = data['lxyzs'], data['lareas']
+        # mvs_root = self.config.get('DEFAULT', 'mvs_root', fallback=None)
+        # if mvs_root is None:
+        # Not an MVS initialization
+        light_h = self.config.getint('DEFAULT', 'light_h')
+        light_w = int(2 * light_h)
+        lxyz, lareas = gen_light_xyz(light_h, light_w)
+        # else:
+        #     # MVS initialization needs a file of light locations
+        #     lxyz_path = join(mvs_root, 'lights.npz')
+        #     with open(lxyz_path, 'rb') as h:
+        #         data = np.load(h)
+        #         data = dict(data)
+        #     lxyz, lareas = data['lxyzs'], data['lareas']
         lxyz = tf.convert_to_tensor(lxyz, dtype=tf.float32)
         lareas = tf.convert_to_tensor(lareas, dtype=tf.float32)
         return lxyz, lareas
@@ -126,12 +126,70 @@ class Model(BaseModel):
         return embedder
 
     def _calc_ldir(self, pts):  # light direction
-        surf2l = tf.reshape(
-            self.lxyz, (1, -1, 3)) - pts[:, None, :]
+
+        toUse = self.lxyz
+
+        if (False):
+            print("Using surface sphere of lights")
+            envmap_h = 16
+            envmap_w = 32
+            envmap_radius = 100
+            lat_step_size = np.pi / (envmap_h + 2)
+            lng_step_size = 2 * np.pi / (envmap_w + 2)
+            lats = np.linspace(np.pi / 2 - lat_step_size, -np.pi / 2 + lat_step_size, envmap_h)
+
+            # print("Forcing only upper hemisphere")
+            # lats = np.linspace(np.pi / 2 - lat_step_size, 0, envmap_h)
+            print("Forcing radius 1.3")
+            envmap_radius = 1.3
+
+            lngs = np.linspace(np.pi - lng_step_size,     -np.pi + lng_step_size,     envmap_w)
+            lngs, lats = np.meshgrid(lngs, lats)
+            rlatlngs = np.dstack((envmap_radius * np.ones_like(lats), lats, lngs))
+            rlatlngs = rlatlngs.reshape(-1, 3)
+            lxyz = xm.geometry.sph.sph2cart(rlatlngs)
+
+            lxyz = lxyz.reshape(envmap_h, envmap_w, 3)
+
+            # print("Raising everything up by 100")
+            # lxyz = lxyz + np.array([0, 0, 100])[None, None, :]
+
+            toUse = tf.convert_to_tensor(lxyz, dtype=tf.float32)
+        else:
+            print("Using self.lxyz")
+
+        # print("Forcing origin 0")
+        surf2l = tf.reshape(toUse, (1, -1, 3)) - pts[:, None, :]
+
+        tf.print("Max:")
+        tf.print(tf.reduce_max(pts, axis=0))
+        tf.print("Min:")
+        tf.print(tf.reduce_min(pts, axis=0))
+
+        # tf.debugging.assert_less(
+        #     tf.linalg.norm(pts, axis=1), 10,
+        #     message="Found point further than 10 units from origin")
+
+        tf.debugging.assert_greater(
+            tf.linalg.norm(surf2l, axis=2), 0.001,
+            message="Found unusually low light displacements below 0.001")
+
+
         surf2l = mathutil.safe_l2_normalize(surf2l, axis=2)
+
+        # x = 1
+        # print("YOOYYOYOYOYOYOOY")
+        # print(pts.shape)
+        # tf.print(pts)
+        # if pts.shape[0] != None:
+        #     x = pts.shape[0]
+
         tf.debugging.assert_greater(
             tf.linalg.norm(surf2l, axis=2), 0.,
             message="Found zero-norm light directions")
+        tf.debugging.assert_less(
+            tf.linalg.norm(surf2l, axis=2), 1.01,
+            message="Found more than one -norm light directions")
         return surf2l # NxLx3
 
     @staticmethod

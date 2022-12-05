@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="fix tf.zeros for light initialization">
+    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="zack commits">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brdf/renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/brdf/renderer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_gen/dtu_mvs/surf_from_mvs.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_gen/dtu_mvs/surf_from_mvs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_gen/merl/make_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_gen/merl/make_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/config/nerfactor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/config/nerfactor.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/geometry_from_nerf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/models/nerfactor_microfacet.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/models/nerfactor_microfacet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/models/shape.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/models/shape.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nerfactor/trainvali.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/trainvali.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/nielsen2015on/exampleTraining.py" beforeDir="false" afterPath="$PROJECT_DIR$/third_party/nielsen2015on/exampleTraining.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train_nerfactor_pt2.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_nerfactor_pt2.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,6 +95,7 @@
       <workItem from="1669675562182" duration="2011000" />
       <workItem from="1669844590862" duration="303000" />
       <workItem from="1669918570967" duration="1297000" />
+      <workItem from="1670011409651" duration="16146000" />
     </task>
     <task id="LOCAL-00001" summary="update train_geom_from_nerf">
       <created>1668638038746</created>
@@ -139,7 +146,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669939289866</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="zack commits">
+      <created>1670011489106</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1670011489106</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,7 +179,8 @@
     <MESSAGE value="fix or" />
     <MESSAGE value="update light initialization" />
     <MESSAGE value="fix tf.zeros for light initialization" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix tf.zeros for light initialization" />
+    <MESSAGE value="zack commits" />
+    <option name="LAST_COMMIT_MESSAGE" value="zack commits" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -187,17 +202,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/shape.py</url>
-          <line>137</line>
+          <line>181</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/shape.py</url>
-          <line>149</line>
+          <line>193</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/shape.py</url>
-          <line>165</line>
+          <line>209</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -297,12 +312,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/trainvali.py</url>
-          <line>290</line>
+          <line>294</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/trainvali.py</url>
-          <line>318</line>
+          <line>324</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -344,6 +359,46 @@
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
           <line>63</line>
           <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
+          <line>218</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
+          <line>223</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>64</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>72</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/shape.py</url>
+          <line>155</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>371</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/trainvali.py</url>
+          <line>297</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/brdf/renderer.py</url>
+          <line>122</line>
+          <option name="timeStamp" value="83" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

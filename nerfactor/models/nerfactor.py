@@ -261,6 +261,10 @@ class Model(ShapeModel):
         brdf = self._eval_brdf_at(
             surf2l, surf2c, normal_pred, albedo, brdf_prop) # NxLx3
         # ------ Rendering equation
+        
+        tf.print("lvis_pred")
+        tf.print(lvis_pred)
+
         rgb_pred, rgb_olat, rgb_probes = self._render( # all Nx3
             lvis_pred, brdf, surf2l, normal_pred, relight_olat=relight_olat,
             relight_probes=relight_probes)
@@ -328,6 +332,11 @@ class Model(ShapeModel):
         # NOTE: unnecessary if light_vis already encodes it, but won't hurt
         front_lit = tf.cast(cos > 0, tf.float32)
         lvis = front_lit * light_vis # NxL
+
+        tf.print("front_lit")
+        tf.print(front_lit)
+        tf.print("lvis in render()")
+        tf.print(lvis)
 
         def integrate(light):
             light_flat = tf.reshape(light, (-1, 3)) # Lx3
