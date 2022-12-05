@@ -197,9 +197,9 @@ def gen_light_xyz(envmap_h, envmap_w, envmap_radius=1e2):
 
         # BEGIN:     THESE VALUES SHOULD BE IN SOME KIND OF CONFIG
         subdivisions = 8
-        xMin, xMax = -1, 1
-        yMin, yMax = -1, 1
-        zMin, zMax = -1, 1
+        xMin, xMax = -1.2, 1.2
+        yMin, yMax = -1.2, 1.2
+        zMin, zMax =    0, 0.6
         # END:       THESE VALUES SHOULD BE IN SOME KIND OF CONFIG
 
         xStep = (xMax - xMin) / subdivisions

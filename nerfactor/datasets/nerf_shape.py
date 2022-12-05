@@ -172,7 +172,7 @@ class Dataset(BaseDataset):
             else:
                 alpha = rgba[:, :, 3] # ground-truth alpha
         # Resize
-        if True: #imh != xyz.shape[0]:
+        if True: # NECESSARY # imh != xyz.shape[0]:
             print('datasets/nerf_shape.py: Resizing images of shape ', xyz.shape, ' to ', imh)  # Zack 11/20 7pm
             xyz = xm.img.resize(xyz, new_h=imh)
             normal = xm.img.resize(normal, new_h=imh)

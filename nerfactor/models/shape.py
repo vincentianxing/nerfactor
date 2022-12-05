@@ -127,62 +127,14 @@ class Model(BaseModel):
 
     def _calc_ldir(self, pts):  # light direction
 
-        toUse = self.lxyz
-
-        if (False):
-            print("Using surface sphere of lights")
-            envmap_h = 16
-            envmap_w = 32
-            envmap_radius = 100
-            lat_step_size = np.pi / (envmap_h + 2)
-            lng_step_size = 2 * np.pi / (envmap_w + 2)
-            lats = np.linspace(np.pi / 2 - lat_step_size, -np.pi / 2 + lat_step_size, envmap_h)
-
-            # print("Forcing only upper hemisphere")
-            # lats = np.linspace(np.pi / 2 - lat_step_size, 0, envmap_h)
-            print("Forcing radius 1.3")
-            envmap_radius = 1.3
-
-            lngs = np.linspace(np.pi - lng_step_size,     -np.pi + lng_step_size,     envmap_w)
-            lngs, lats = np.meshgrid(lngs, lats)
-            rlatlngs = np.dstack((envmap_radius * np.ones_like(lats), lats, lngs))
-            rlatlngs = rlatlngs.reshape(-1, 3)
-            lxyz = xm.geometry.sph.sph2cart(rlatlngs)
-
-            lxyz = lxyz.reshape(envmap_h, envmap_w, 3)
-
-            # print("Raising everything up by 100")
-            # lxyz = lxyz + np.array([0, 0, 100])[None, None, :]
-
-            toUse = tf.convert_to_tensor(lxyz, dtype=tf.float32)
-        else:
-            print("Using self.lxyz")
-
-        # print("Forcing origin 0")
-        surf2l = tf.reshape(toUse, (1, -1, 3)) - pts[:, None, :]
+        surf2l = tf.reshape(self.lxyz, (1, -1, 3)) - pts[:, None, :]
 
         tf.print("Max:")
         tf.print(tf.reduce_max(pts, axis=0))
         tf.print("Min:")
         tf.print(tf.reduce_min(pts, axis=0))
 
-        # tf.debugging.assert_less(
-        #     tf.linalg.norm(pts, axis=1), 10,
-        #     message="Found point further than 10 units from origin")
-
-        tf.debugging.assert_greater(
-            tf.linalg.norm(surf2l, axis=2), 0.001,
-            message="Found unusually low light displacements below 0.001")
-
-
         surf2l = mathutil.safe_l2_normalize(surf2l, axis=2)
-
-        # x = 1
-        # print("YOOYYOYOYOYOYOOY")
-        # print(pts.shape)
-        # tf.print(pts)
-        # if pts.shape[0] != None:
-        #     x = pts.shape[0]
 
         tf.debugging.assert_greater(
             tf.linalg.norm(surf2l, axis=2), 0.,

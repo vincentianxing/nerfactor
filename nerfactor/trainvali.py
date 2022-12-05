@@ -274,34 +274,15 @@ def distributed_train_step(strategy, model, batch, optimizer, global_bs):
     assert model.trainable_registered, \
         "Register the trainable layers before using `trainable_variables`"
 
-    def debuga(thing, str):
-        tf.print(str)
-        tf.print(thing)
-        tf.print("\n")
-        # x_in = tf.identity(thing)
-        # with tf.compat.v1.Session() as sess:
-        #     print("inside. ", str, " has shape", sess.run(tf.shape(x_in)))
-        #     print("inside. ", str, " has min", sess.run(tf.math.reduce_min(x_in)))
-        #     print("inside. ", str, " has max", sess.run(tf.math.reduce_max(x_in)))
-        #     print("inside. are there any nans in ", str, "?", sess.run(tf.reduce_any(tf.math.is_nan(x_in))))
-
     def train_step(batch):
         with tf.GradientTape() as tape:
             pred, gt, loss_kwargs, partial_to_vis = model(batch, mode='train')
-            debuga(pred['albedo'], "pred['albedo']")
-
             loss_kwargs['keep_batch'] = True # keep the batch dimension
-
             per_example_loss = model.compute_loss(pred, gt, **loss_kwargs)
-            debuga(per_example_loss, "per_example_loss")
-
             weighted_loss = tf.nn.compute_average_loss(
                 per_example_loss, global_batch_size=global_bs)
-            debuga(weighted_loss, "weighted_loss")
 
         grads = tape.gradient(weighted_loss, model.trainable_variables)
-
-        debuga(grads, "grads")
         optimizer.apply_gradients(zip(grads, model.trainable_variables))
         return weighted_loss, partial_to_vis
 
