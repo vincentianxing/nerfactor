@@ -374,10 +374,12 @@ class Model(ShapeModel):
 
     @property
     def light(self):
+        # Use white light to encourage albedo MLP to learn better color
         forceLightSingleChannel = True
         if forceLightSingleChannel:
             tf.print("Forcing lights to be white")
 
+        # Use low light intensity initialization to encourage albedo to count for the color
         lowIntensities = True
         if lowIntensities:
             tf.print("Initializing lights at very low intensities")
