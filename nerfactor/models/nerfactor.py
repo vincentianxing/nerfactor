@@ -374,14 +374,35 @@ class Model(ShapeModel):
 
     @property
     def light(self):
+        forceLightSingleChannel = True
+        if forceLightSingleChannel:
+            tf.print("Forcing lights to be white")
+
+        lowIntensities = True
+        if lowIntensities:
+            tf.print("Initializing lights at very low intensities")
+
         if self._light is None: # initialize just once
             maxv = self.config.getfloat('DEFAULT', 'light_init_max')
-            light = tf.random.uniform(
-                self.light_res + (3,), minval=0., maxval=maxv)
+
+            if lowIntensities:
+                maxv = 0.000005
+
+            light = tf.random.uniform(self.light_res + (3,), minval=0., maxval=maxv)
+            if forceLightSingleChannel:
+                light = tf.random.uniform(self.light_res, minval=0., maxval=maxv)
+
             self._light = tf.Variable(light, trainable=True)
-        # print("Max light intensity: ", np.max(self._light))
-        # No negative light
-        return tf.clip_by_value(self._light, 0., np.inf) # 3D
+
+        tf.print("Max light intensity: ")
+        tf.print(tf.reduce_max(self._light))
+
+        ret_value = tf.clip_by_value(self._light, 0., np.inf) # No negative light
+
+        if forceLightSingleChannel:
+            return tf.stack([ret_value, ret_value, ret_value], axis=2)
+
+        return ret_value
 
     def _pred_albedo_at(self, pts):
         # Given that albedo generally ranges from 0.1 to 0.8
