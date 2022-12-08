@@ -187,8 +187,12 @@ def main(_):
             _, _, _, _, _, _, xyz, _, _ = batch
             albedo_override = get_albedo_override(xyz)
         # Inference
+        # _, _, _, to_vis = model.call(
+        #     batch, mode='test', relight_olat=relight_olat, relight_probes=True,
+        #     albedo_scales=albedo_scales, albedo_override=albedo_override,
+        #     brdf_z_override=brdf_z_override)
         _, _, _, to_vis = model.call(
-            batch, mode='test', relight_olat=relight_olat, relight_probes=True,
+            batch, mode='test', relight_olat=True, relight_probes=False, # olat only!!!
             albedo_scales=albedo_scales, albedo_override=albedo_override,
             brdf_z_override=brdf_z_override)
         # Visualize

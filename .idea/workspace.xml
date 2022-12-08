@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="implement white light with low intensity">
+    <list default="true" id="857730a2-3cd3-4cfb-9413-990bf5f0613f" name="Changes" comment="comment: implement white light with low intensity">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_gen/nerf_synth/render.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_gen/nerf_synth/render.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/models/nerfactor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerfactor/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/nerfactor/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_nerfactor_pt3.sh" beforeDir="false" afterPath="$PROJECT_DIR$/train_nerfactor_pt3.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +93,8 @@
       <workItem from="1670011409651" duration="16146000" />
       <workItem from="1670267619202" duration="72000" />
       <workItem from="1670272148759" duration="5490000" />
-      <workItem from="1670444077688" duration="5437000" />
+      <workItem from="1670444077688" duration="5461000" />
+      <workItem from="1670528209373" duration="3781000" />
     </task>
     <task id="LOCAL-00001" summary="update train_geom_from_nerf">
       <created>1668638038746</created>
@@ -176,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670449386742</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="comment: implement white light with low intensity">
+      <created>1670450364718</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1670450364718</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +218,8 @@
     <MESSAGE value="update" />
     <MESSAGE value="update pt3" />
     <MESSAGE value="implement white light with low intensity" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement white light with low intensity" />
+    <MESSAGE value="comment: implement white light with low intensity" />
+    <option name="LAST_COMMIT_MESSAGE" value="comment: implement white light with low intensity" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -294,7 +306,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/test.py</url>
-          <line>195</line>
+          <line>199</line>
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -313,11 +325,6 @@
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>63</line>
-          <option name="timeStamp" value="74" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
           <line>218</line>
           <option name="timeStamp" value="75" />
@@ -326,11 +333,6 @@
           <url>file://$PROJECT_DIR$/nerfactor/geometry_from_nerf.py</url>
           <line>223</line>
           <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>64</line>
-          <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
@@ -354,7 +356,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>658</line>
+          <line>661</line>
           <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -369,7 +371,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>494</line>
+          <line>497</line>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -384,23 +386,58 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>375</line>
+          <line>378</line>
           <option name="timeStamp" value="94" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>390</line>
+          <line>393</line>
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>382</line>
+          <line>385</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
-          <line>392</line>
+          <line>395</line>
           <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data_gen/nerf_synth/render.py</url>
+          <line>198</line>
+          <option name="timeStamp" value="99" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data_gen/nerf_synth/render.py</url>
+          <line>187</line>
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>371</line>
+          <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>354</line>
+          <option name="timeStamp" value="102" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/test.py</url>
+          <line>194</line>
+          <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>67</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nerfactor/models/nerfactor.py</url>
+          <line>81</line>
+          <option name="timeStamp" value="106" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

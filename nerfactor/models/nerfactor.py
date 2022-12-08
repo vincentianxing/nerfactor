@@ -65,7 +65,7 @@ class Model(ShapeModel):
         lxyz, lareas = self._gen_lights()
         self.lxyz, self.lareas = lxyz, lareas
         # Novel lighting conditions for relighting at test time:
-        olat_inten = self.config.getfloat('DEFAULT', 'olat_inten', fallback=200)
+        olat_inten = self.config.getfloat('DEFAULT', 'olat_inten', fallback=10) # Change light intensity here!!!
         ambi_inten = self.config.getfloat(
             'DEFAULT', 'ambient_inten', fallback=0)
         # (1) OLAT
@@ -357,6 +357,8 @@ class Model(ShapeModel):
             for _, light in self.novel_olat.items():
                 rgb_relit = integrate(light)
                 rgb_olat.append(rgb_relit)
+            print("relight_olat is ", repr(relight_olat))
+            print([a.device for a in rgb_olat])
             rgb_olat = tf.concat([x[:, None, :] for x in rgb_olat], axis=1)
             rgb_olat = tf.debugging.check_numerics(rgb_olat, "OLAT Renders")
         # ------ Continue to render light probe-relit results
@@ -366,6 +368,7 @@ class Model(ShapeModel):
             for _, light in self.novel_probes.items():
                 rgb_relit = integrate(light)
                 rgb_probes.append(rgb_relit)
+            print("relight_probes is ", repr(relight_probes))
             print([a.device for a in rgb_probes])
             rgb_probes = tf.concat([x[:, None, :] for x in rgb_probes], axis=1)
             rgb_probes = tf.debugging.check_numerics(
@@ -375,7 +378,7 @@ class Model(ShapeModel):
     @property
     def light(self):
         # Use white light to encourage albedo MLP to learn better color
-        forceLightSingleChannel = True
+        forceLightSingleChannel = False
         if forceLightSingleChannel:
             tf.print("Forcing lights to be white")
 

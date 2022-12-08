@@ -188,6 +188,7 @@ def render_view(cam_transform_mat, cam_angle_x, outdir):
     if FLAGS.test_light_dir is not None:
         # With HDR maps
         for envmap_path in xm.os.sortglob(FLAGS.test_light_dir, '*.hdr'):
+            print("HDR: ", envmap_path)
             envmap_name = basename(envmap_path).split('.')[0]
             outpath = join(outdir, 'rgba_%s.png' % envmap_name)
             if exists(outpath):
@@ -196,6 +197,7 @@ def render_view(cam_transform_mat, cam_angle_x, outdir):
             xm.blender.render.render(outpath, cam=cam_obj)
         # With OLAT
         for envmap_path in xm.os.sortglob(FLAGS.test_light_dir, '*.json'):
+            print("OLAT: ", envmap_path)
             envmap_name = basename(envmap_path).split('.')[0]
             outpath = join(outdir, 'rgba_%s.png' % envmap_name)
             if exists(outpath):
