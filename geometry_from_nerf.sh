@@ -1,5 +1,6 @@
 # /home/dhu24/miniconda3/condabin/conda init
 # /home/dhu24/miniconda3/condabin/conda activate nerfactor
+
 # scene='lego_3072'
 # gpus='0'
 # proj_root='/home/dhu24/GitHub'
@@ -13,6 +14,8 @@
 
 # #scp -r /Users/mandyhe/Documents/Fall2022-2023/CSCI2951I\ /nerfactor/data/render_outdoor_inten3_gi/drums_new_black/ mhe26@ssh.cs.brown.edu:/home/mhe26/cs2951I/james/data/
 #scp -r /Users/mandyhe/Documents/Fall2022-2023/CSCI2951I\ /nerfactor/data/render_outdoor_inten3_gi/hotdog_new_black/ mhe26@ssh.cs.brown.edu:/home/mhe26/cs2951I/james/data/
+#scp -r /Users/mandyhe/Documents/Fall2022-2023/CSCI2951I\ /nerfactor/data/render_outdoor_inten3_gi/hotdog_voxel_bright_new_black/ mhe26@ssh.cs.brown.edu:/home/mhe26/cs2951I/james/data/
+#scp -r /Users/mandyhe/Documents/Fall2022-2023/CSCI2951I\ /nerfactor/data/render_outdoor_inten3_gi/hotdog_voxel_even_black/ mhe26@ssh.cs.brown.edu:/home/mhe26/cs2951I/james/data/
 
 source /home/mhe26/miniconda3/etc/profile.d/conda.sh
 echo "$SHELL"    

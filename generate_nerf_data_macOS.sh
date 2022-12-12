@@ -1,4 +1,4 @@
-scene='hotdog_voxel_bright'
+scene='hotdog_voxel_even'
 light='black'
 proj_root='/Users/mandyhe/Documents/Fall2022-2023/CSCI2951I /nerfactor'
 blender_bin="/Applications/Blender.app/Contents/MacOS/Blender"
